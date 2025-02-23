@@ -61,6 +61,7 @@ jobs:
         uses: docker/build-push-action@v6.14.0
         with:
           push: true
+          file: src/Anvil.Server/Dockerfile
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
 
