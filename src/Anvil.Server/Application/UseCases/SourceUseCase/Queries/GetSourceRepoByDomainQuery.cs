@@ -52,7 +52,7 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
         if (record is not null)
         {
             result = await _mediator.Send(new ParsePagesDomainQuery(record), cancellationToken);
-            if (result is not null && await IsCustomDomainValid(record, result, cancellationToken))
+            if (result is not null && await IsCustomDomainValid(domain, result, cancellationToken))
                 return result;
         }
 
@@ -61,7 +61,7 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
         if (record is not null)
         {
             result = await _mediator.Send(new ParsePagesDomainQuery(record), cancellationToken);
-            if (result is not null && await IsCustomDomainValid(record, result, cancellationToken))
+            if (result is not null && await IsCustomDomainValid(domain, result, cancellationToken))
                 return result;
         }
 
