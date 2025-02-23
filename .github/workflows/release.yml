@@ -67,7 +67,7 @@ jobs:
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
 
-      - name: Generate artifact attestation
+      - name: generate artifact attestation
         uses: actions/attest-build-provenance@v2.2.0
         with:
           subject-name: ghcr.io/${{ github.repository }}
@@ -76,6 +76,8 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     needs:
       - publish-binary
       - publish-container
@@ -94,7 +96,7 @@ jobs:
           tag: ${{ github.ref_name }}
 
       - name: create release
-        uses: ncipollo/release-action@cdcc88a9acf3ca41c16c37bb7d21b9ad48560d87 # v1.15.0
+        uses: ncipollo/release-action@v1.16.0
         with:
           draft: true
           makeLatest: true
