@@ -35,6 +35,12 @@ jobs:
 
   publish-container:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+      
     steps:
       - uses: actions/checkout@v4
       - name: login to registry
@@ -48,7 +54,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5.6.1
         with:
-          images: crookm/anvil
+          images: ghcr.io/${{ github.repository }}
 
       - name: build and push
         uses: docker/build-push-action@v6.14.0
