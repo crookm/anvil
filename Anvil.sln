@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{7FC41739-6526-493B-994A-78C4E7CE5799}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		LICENSE = LICENSE
+		Directory.Build.props = Directory.Build.props
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CD57A4AB-A330-4F23-8451-52972D05CB8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{31382164-2E53-4627-89ED-E829C8CBD959}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{6D2D3F85-7950-4BA7-B2C3-16D338B1E2C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{98D38C35-CA30-4DF2-ADDC-215F755633BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anvil.Server", "src\Anvil.Server\Anvil.Server.csproj", "{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D2D3F85-7950-4BA7-B2C3-16D338B1E2C3} = {31382164-2E53-4627-89ED-E829C8CBD959}
+		{98D38C35-CA30-4DF2-ADDC-215F755633BE} = {31382164-2E53-4627-89ED-E829C8CBD959}
+		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1} = {CD57A4AB-A330-4F23-8451-52972D05CB8A}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
