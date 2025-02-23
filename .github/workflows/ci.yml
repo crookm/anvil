@@ -21,9 +21,9 @@ jobs:
       - name: build
         run: dotnet build -c Release --no-restore
       - name: publish
-        run: dotnet publish src/Anvil.Server -c Release --no-restore -o publish
+        run: dotnet publish src/Anvil.Server -c Release -o publish /p AssemblyName=anvil-server
 
       - uses: actions/upload-artifact@v4
         with:
           name: application
-          path: publish/Anvil.Server
+          path: publish/anvil-server

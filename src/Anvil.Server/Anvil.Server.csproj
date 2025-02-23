@@ -3,6 +3,7 @@
     <PropertyGroup>
         <Title>Anvil Server</Title>
         <Product>Anvil Server</Product>
+        <AssemblyName>anvil-server_$(RuntimeIdentifier)</AssemblyName>
         <InvariantGlobalization>true</InvariantGlobalization>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
