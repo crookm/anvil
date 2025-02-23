@@ -40,7 +40,9 @@ jobs:
       packages: write
       attestations: write
       id-token: write
-      
+    env:
+      DOCKER_BUILD_RECORD_UPLOAD: false
+    
     steps:
       - uses: actions/checkout@v4
       - name: login to registry
