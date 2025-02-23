@@ -17,13 +17,13 @@ RUN dotnet restore "src/Anvil.Server/Anvil.Server.csproj"
 COPY . .
 WORKDIR /source/src/Anvil.Server
 
-RUN dotnet build -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build -c $BUILD_CONFIGURATION --no-restore
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish
+RUN dotnet publish -c $BUILD_CONFIGURATION -o /app/publish /p AssemblyName=anvil-server
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["/app/Anvil.Server"]
+ENTRYPOINT ["/app/anvil-server"]
