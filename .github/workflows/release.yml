@@ -1,0 +1,95 @@
+name: release
+
+on:
+  push:
+    tags: [ "v*" ]
+
+jobs:
+  publish-binary:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        runtime:
+          - linux-x64
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: restore
+        run: dotnet restore
+      - name: build
+        run: dotnet build -c Release --no-restore
+      - name: publish
+        run: |
+          VERSION=${{ github.ref_name }}
+          dotnet publish src/Anvil.Server -c Release -r ${{ matrix.runtime }} -o publish /p Version=${VERSION#v}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.runtime }}
+          path: publish/anvil-server_${{ matrix.runtime }}
+
+  publish-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: login to registry
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: extract metadata
+        id: metadata
+        uses: docker/metadata-action@v5.6.1
+        with:
+          images: crookm/anvil
+
+      - name: build and push
+        uses: docker/build-push-action@v6.14.0
+        with:
+          push: true
+          provenance: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - publish-binary
+      - publish-container
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: bin
+
+      - name: generate changelog
+        id: changelog
+        uses: requarks/changelog-action@6d71e098526ee17bae963f058d34cd763378337f # v1.10.2
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+
+      - name: create release
+        uses: ncipollo/release-action@cdcc88a9acf3ca41c16c37bb7d21b9ad48560d87 # v1.15.0
+        with:
+          draft: true
+          makeLatest: true
+          allowUpdates: true
+          artifacts: bin/*
+          artifactErrorsFailBuild: true
+          body: ${{ steps.changelog.outputs.changes }}
+
+      - name: commit changelog
+        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
+        with:
+          branch: main
+          commit_message: 'docs: update changelog for ${{ github.ref_name }} [skip ci]'
+          file_pattern: CHANGELOG.md
