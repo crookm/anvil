@@ -87,6 +87,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: bin
+          merge-multiple: true
 
       - name: generate changelog
         id: changelog
