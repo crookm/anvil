@@ -44,15 +44,6 @@ internal sealed class GetSourceRoutedMediaQueryHandler : IQueryHandler<GetSource
         {
         }
 
-        // Fall back to default index.html if the direct lookup fails with not found.
-        // > Used for single-page apps - if there is also no index.html, we just bubble the notfound exception.
-        path = Path.GetDirectoryName(path) ?? string.Empty;
-        path = Path.Combine(path, "index.html");
-        {
-            var result = await _sourceProvider.GetMediaAsync(query.Repository, path, cancellationToken);
-            if (result is not null) return result;
-        }
-
         throw new HttpRequestException("Unable to satisfy routed media request.", null, HttpStatusCode.NotFound);
     }
 }
