@@ -47,17 +47,17 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
         var result = await _mediator.Send(new ParsePagesDomainQuery(domain), cancellationToken);
         if (result is not null) return result;
 
-        // Lookup TXT record for a link to a repo
-        var record = await _mediator.Send(new LookupTxtRecordQuery(domain), cancellationToken);
-        if (record is not null)
+        // Lookup TXT records for a link to a repo
+        var records = await _mediator.Send(new LookupTxtRecordQuery(domain), cancellationToken);
+        foreach (var txtRecord in records)
         {
-            result = await _mediator.Send(new ParsePagesDomainQuery(record), cancellationToken);
+            result = await _mediator.Send(new ParsePagesDomainQuery(txtRecord), cancellationToken);
             if (result is not null && await IsCustomDomainValid(domain, result, cancellationToken))
                 return result;
         }
 
         // Lookup CNAME record for a link to a repo
-        record = await _mediator.Send(new LookupCnameRecordQuery(domain), cancellationToken);
+        var record = await _mediator.Send(new LookupCnameRecordQuery(domain), cancellationToken);
         if (record is not null)
         {
             result = await _mediator.Send(new ParsePagesDomainQuery(record), cancellationToken);
