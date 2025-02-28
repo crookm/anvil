@@ -11,11 +11,13 @@ internal class ForgejoSourceProvider : ISourceProvider
 {
     private readonly HttpClient _httpClient;
 
-    public ForgejoSourceProvider(IOptionsSnapshot<Configuration> configurationSnapshot, HttpClient httpClient)
+    public ForgejoSourceProvider(IOptionsSnapshot<Configuration> configurationSnapshot, IHttpClientFactory httpClientFactory)
     {
-        _httpClient = httpClient;
-
         var configuration = configurationSnapshot.Value;
+        _httpClient = configuration.RepoApiDangerouslyIgnoreTlsErrors
+            ? httpClientFactory.CreateClient("tls-ignored_dangerous")
+            : httpClientFactory.CreateClient();
+
         _httpClient.BaseAddress = new Uri(configuration.RepoApiBaseUrl);
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", configuration.RepoApiToken);
         _httpClient.DefaultRequestHeaders.Host = configuration.RepoApiHostOverride;

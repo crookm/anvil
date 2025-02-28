@@ -11,4 +11,5 @@ internal sealed class Configuration
     [Required] public required string RepoApiToken { get; set; }
     
     public string? RepoApiHostOverride { get; set; }
+    public bool RepoApiDangerouslyIgnoreTlsErrors { get; set; } = false;
 }

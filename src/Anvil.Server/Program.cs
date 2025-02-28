@@ -15,6 +15,8 @@ builder.Services.AddSingleton<IValidateOptions<Configuration>, ValidationConfigu
 
 // Infrastructure
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("tls-ignored_dangerous")
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { ServerCertificateCustomValidationCallback = (_, _, _, _) => true });
 builder.Services.AddResponseCaching(); // Default 100 MB response cache size
 builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
 
