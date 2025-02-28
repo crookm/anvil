@@ -18,6 +18,7 @@ internal class ForgejoSourceProvider : ISourceProvider
         var configuration = configurationSnapshot.Value;
         _httpClient.BaseAddress = new Uri(configuration.RepoApiBaseUrl);
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", configuration.RepoApiToken);
+        _httpClient.DefaultRequestHeaders.Host = configuration.RepoApiHostOverride;
     }
 
     public async ValueTask<bool> IsRepoAvailableAsync(RepositoryReferenceModel repo, CancellationToken cancellationToken = default)
