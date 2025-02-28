@@ -57,6 +57,9 @@ jobs:
         uses: docker/metadata-action@v5.6.1
         with:
           images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: build and push
         id: push
