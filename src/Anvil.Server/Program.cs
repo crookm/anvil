@@ -35,5 +35,6 @@ var app = builder.Build();
 app.UseResponseCaching();
 
 app.MapGet("/{**path}", HttpHandlers.GetRoutedSourceMedia);
+app.MapGet("/_internal/dns/validate", HttpHandlers.GetInternalDomainValidity);
 
 await app.RunAsync();

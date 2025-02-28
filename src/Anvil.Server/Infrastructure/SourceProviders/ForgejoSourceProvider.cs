@@ -20,6 +20,21 @@ internal class ForgejoSourceProvider : ISourceProvider
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", configuration.RepoApiToken);
     }
 
+    public async ValueTask<bool> IsRepoAvailableAsync(RepositoryReferenceModel repo, CancellationToken cancellationToken = default)
+    {
+        // A different endpoint is used based on the repository reference (branch) being null or not.
+        // > This is because null infers default branch, so it is easier to just check if the repo exists in this case, rather than checking for the default branch (duh).
+        var uri = string.IsNullOrWhiteSpace(repo.RepoRef)
+            ? $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}" // Default branch, check for repo existence
+            : $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}/branches/{repo.RepoRef}"; // Specified branch, check for branch existence
+
+        var request = new HttpRequestMessage(HttpMethod.Get, uri);
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var response = await _httpClient.SendAsync(request, cancellationToken);
+        return response.IsSuccessStatusCode;
+    }
+
     public async ValueTask<SourceMediaStreamedModel?> GetMediaAsync(RepositoryReferenceModel repo, string path,
         CancellationToken cancellationToken = default)
     {

@@ -8,7 +8,8 @@ namespace Anvil.Server.Application.UseCases.SourceUseCase;
 
 internal static class HttpHandlers
 {
-    public static async ValueTask<IResult> GetRoutedSourceMedia(HttpContext context,
+    public static async ValueTask<IResult> GetRoutedSourceMedia(
+        HttpContext context,
         [FromRoute] string? path,
         [FromServices] Mediator.Mediator mediator,
         CancellationToken cancellationToken)
@@ -36,6 +37,30 @@ internal static class HttpHandlers
         catch (HttpRequestException e) when (e.StatusCode is not null)
         {
             return Results.StatusCode((int)e.StatusCode);
+        }
+    }
+
+    public static async ValueTask<IResult> GetInternalDomainValidity(
+        HttpContext context,
+        [FromQuery] string domain,
+        [FromServices] Mediator.Mediator mediator,
+        CancellationToken cancellationToken)
+    {
+        domain = domain.ToLowerInvariant().Trim();
+
+        try
+        {
+            var repo = await mediator.Send(new GetSourceRepoByDomainQuery(domain), cancellationToken);
+            if (repo == null) return Results.NotFound();
+
+            if (await mediator.Send(new GetSourceRepoValidityQuery(repo), cancellationToken))
+                return Results.Ok();
+
+            return Results.NotFound();
+        }
+        catch
+        {
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }
