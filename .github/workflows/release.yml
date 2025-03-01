@@ -63,7 +63,7 @@ jobs:
 
       - name: build and push
         id: push
-        uses: docker/build-push-action@v6.14.0
+        uses: docker/build-push-action@v6.15.0
         with:
           push: true
           file: src/Anvil.Server/Dockerfile
