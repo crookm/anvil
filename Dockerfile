@@ -14,7 +14,7 @@ COPY ["Directory.Build.props", "Directory.Build.props"]
 COPY ["src/Anvil.Server/Anvil.Server.csproj", "src/Anvil.Server/"]
 RUN dotnet restore "src/Anvil.Server/Anvil.Server.csproj"
 
-COPY . .
+COPY src/ src/
 WORKDIR /source/src/Anvil.Server
 
 RUN dotnet build -c $BUILD_CONFIGURATION --no-restore
