@@ -47,7 +47,7 @@ internal sealed partial class ParsePagesDomainQueryHandler : IQueryHandler<Parse
 
         domainSegments = domainSegments[..^rootDomainSegments.Length];
 
-        if (domainSegments.Length == 0) return null;
+        if (domainSegments.Length is 0 or > 2) return null;
 
         // Root 'pages' repo for a user (i.e. matt.example.com -> matt/pages@<default>)
         if (domainSegments.Length == 1) return new RepositoryReferenceModel { OwnerUserName = domainSegments[0], RepoName = "pages", RepoRef = null };

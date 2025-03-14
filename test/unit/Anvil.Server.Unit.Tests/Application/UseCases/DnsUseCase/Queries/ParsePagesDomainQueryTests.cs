@@ -62,6 +62,34 @@ public class ParsePagesDomainQueryTests
     }
 
     [Fact]
+    public async Task Handle_ShouldReturnNull_WhereDomainDomainDoesNotParseExactly()
+    {
+        // NOTE: an endpoint is provided to validate domains for the purposes of on-demand TLS like with Caddy, so we need to make sure that adding more segments to the left of a
+        //  valid domain does not parse as acceptable for this endpoint, or there could be an infinite number of valid domains for the same repo which would be given a TLS cert.
+
+        // Arrange
+        const string pagesDomain = "example.page";
+        const string userPageDomain = $"a.a.repo.user.{pagesDomain}";
+
+        var optionsSnapshotMock = Substitute.For<IOptionsSnapshot<Configuration>>();
+        optionsSnapshotMock.Value.Returns(new Configuration
+        {
+            PagesDomain = pagesDomain,
+            RepoApiBaseUrl = "example.com",
+            RepoApiToken = "xyz"
+        });
+
+        var query = new ParsePagesDomainQuery(DnsString.Parse(userPageDomain));
+        var handler = new ParsePagesDomainQueryHandler(NullLogger<ParsePagesDomainQueryHandler>.Instance, optionsSnapshotMock);
+
+        // Act
+        var result = await handler.Handle(query, CancellationToken.None);
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
     public async Task Handle_ShouldReturnReference_WhereDomainIsUserRepo()
     {
         // Arrange
