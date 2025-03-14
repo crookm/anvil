@@ -15,10 +15,10 @@ public sealed record LookupCnameRecordQuery(DnsString Domain) : IQuery<DnsString
 
 internal sealed partial class LookupCnameRecordQueryHandler : IQueryHandler<LookupCnameRecordQuery, DnsString?>
 {
-    private readonly ILogger<LookupCnameRecordQuery> _logger;
+    private readonly ILogger<LookupCnameRecordQueryHandler> _logger;
     private readonly IDnsQuery _dnsQuery;
 
-    public LookupCnameRecordQueryHandler(ILogger<LookupCnameRecordQuery> logger, IDnsQuery dnsQuery)
+    public LookupCnameRecordQueryHandler(ILogger<LookupCnameRecordQueryHandler> logger, IDnsQuery dnsQuery)
     {
         _logger = logger;
         _dnsQuery = dnsQuery;
