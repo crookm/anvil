@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		LICENSE = LICENSE
 		Directory.Build.props = Directory.Build.props
 		.github\dependabot.yml = .github\dependabot.yml
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CD57A4AB-A330-4F23-8451-52972D05CB8A}"
