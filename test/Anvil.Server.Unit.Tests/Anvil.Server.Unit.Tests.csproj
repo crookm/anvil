@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\src\Anvil.Server\Anvil.Server.csproj" />
+        <ProjectReference Include="..\..\src\Anvil.Server\Anvil.Server.csproj" />
     </ItemGroup>
 
 </Project>
