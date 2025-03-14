@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Anvil.Server.Domain.Models;
 
 /// <summary>
 /// A reference to a repository.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public sealed record RepositoryReferenceModel
 {
     /// <summary>

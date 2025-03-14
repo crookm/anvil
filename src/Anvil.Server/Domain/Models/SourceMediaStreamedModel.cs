@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Anvil.Server.Domain.Models;
 
+[ExcludeFromCodeCoverage]
 public record SourceMediaStreamedModel
 {
     public required string Path { get; init; }
