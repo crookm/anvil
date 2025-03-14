@@ -18,7 +18,7 @@ internal sealed partial class LookupTxtRecordQueryHandler : IQueryHandler<Lookup
     private readonly ILogger<LookupTxtRecordQueryHandler> _logger;
     private readonly IDnsQuery _dnsQuery;
 
-    private const int MaxTxtRecords = 8;
+    internal const int MaxTxtRecords = 8;
 
     public LookupTxtRecordQueryHandler(ILogger<LookupTxtRecordQueryHandler> logger, IDnsQuery dnsQuery)
     {

@@ -3,7 +3,6 @@ using DnsClient;
 using DnsClient.Protocol;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute.ExceptionExtensions;
-using System.Net;
 
 namespace Anvil.Server.Unit.Tests.Application.UseCases.DnsUseCase.Queries;
 
@@ -20,7 +19,7 @@ public class LookupCnameRecordQueryTests
             .ThrowsAsync(new DnsResponseException(DnsResponseCode.NotExistentDomain));
 
         var query = new LookupCnameRecordQuery(DnsString.Parse(domain));
-        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQuery>.Instance, dnsQueryMock);
+        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQueryHandler>.Instance, dnsQueryMock);
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
@@ -38,18 +37,14 @@ public class LookupCnameRecordQueryTests
         const string domain = "example.com";
 
         var dnsResponseMock = Substitute.For<IDnsQueryResponse>();
-        dnsResponseMock.Answers.Returns([
-            new ARecord(
-                new ResourceRecordInfo(domain, ResourceRecordType.A, QueryClass.IN, 10, 10),
-                IPAddress.Loopback)
-        ]);
+        dnsResponseMock.Answers.Returns([]);
 
         var dnsQueryMock = Substitute.For<IDnsQuery>();
         dnsQueryMock.QueryAsync(Arg.Any<string>(), QueryType.CNAME, QueryClass.IN, Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(dnsResponseMock));
 
         var query = new LookupCnameRecordQuery(DnsString.Parse(domain));
-        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQuery>.Instance, dnsQueryMock);
+        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQueryHandler>.Instance, dnsQueryMock);
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
@@ -81,7 +76,7 @@ public class LookupCnameRecordQueryTests
             .Returns(Task.FromResult(dnsResponseMock));
 
         var query = new LookupCnameRecordQuery(DnsString.Parse(domain));
-        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQuery>.Instance, dnsQueryMock);
+        var handler = new LookupCnameRecordQueryHandler(NullLogger<LookupCnameRecordQueryHandler>.Instance, dnsQueryMock);
 
         // Act
         var result = await handler.Handle(query, CancellationToken.None);
