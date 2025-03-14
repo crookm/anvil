@@ -20,6 +20,8 @@ jobs:
         run: dotnet restore
       - name: build
         run: dotnet build -c Release --no-restore
+      - name: test
+        run: dotnet test
       - name: publish
         run: dotnet publish src/Anvil.Server -c Release -o publish /p AssemblyName=anvil-server
 

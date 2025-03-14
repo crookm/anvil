@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anvil.Server", "src\Anvil.Server\Anvil.Server.csproj", "{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anvil.Server.Unit.Tests", "test\unit\Anvil.Server.Unit.Tests\Anvil.Server.Unit.Tests.csproj", "{08D45492-6D14-443C-BBA7-C0F04D113883}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,11 +38,16 @@ Global
 		{6D2D3F85-7950-4BA7-B2C3-16D338B1E2C3} = {31382164-2E53-4627-89ED-E829C8CBD959}
 		{98D38C35-CA30-4DF2-ADDC-215F755633BE} = {31382164-2E53-4627-89ED-E829C8CBD959}
 		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1} = {CD57A4AB-A330-4F23-8451-52972D05CB8A}
+		{08D45492-6D14-443C-BBA7-C0F04D113883} = {6D2D3F85-7950-4BA7-B2C3-16D338B1E2C3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED2EF6B7-6D96-4D02-9AF5-F7B17F49CEE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08D45492-6D14-443C-BBA7-C0F04D113883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D45492-6D14-443C-BBA7-C0F04D113883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D45492-6D14-443C-BBA7-C0F04D113883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D45492-6D14-443C-BBA7-C0F04D113883}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
