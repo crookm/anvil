@@ -71,7 +71,7 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
 
       - name: generate artifact attestation
-        uses: actions/attest-build-provenance@v2.2.2
+        uses: actions/attest-build-provenance@v2.2.3
         with:
           subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.push.outputs.digest }}
