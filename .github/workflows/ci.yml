@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: docker
+    env:
+      DOTNET_INSTALL_DIR: ~/.local/bin/dotnet
 
     steps:
       - uses: https://data.forgejo.org/actions/checkout@v4

@@ -7,6 +7,8 @@ on:
 jobs:
   publish-binary:
     runs-on: docker
+    env:
+      DOTNET_INSTALL_DIR: ~/.local/bin/dotnet
     strategy:
       fail-fast: true
       matrix:
