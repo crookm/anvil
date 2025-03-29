@@ -1,8 +1,8 @@
 # Anvil Pages Server
 
-[![GitHub Actions status of CI workflow](https://img.shields.io/github/actions/workflow/status/crookm/anvil/ci.yml?label=ci)](https://github.com/crookm/anvil/actions/workflows/ci.yml)
-[![GitHub Actions status of CI workflow](https://img.shields.io/github/actions/workflow/status/crookm/anvil/release.yml?label=release)](https://github.com/crookm/anvil/actions/workflows/release.yml)
-[![Latest release version](https://img.shields.io/github/v/release/crookm/anvil)](https://github.com/crookm/anvil/releases/latest)
+[![Status of CI workflow](https://enduringtech.dev/matt/anvil/badges/workflows/ci/badge.svg?label=ci)](https://github.com/crookm/anvil/actions/workflows/ci.yml)
+[![Status of release workflow](https://enduringtech.dev/matt/anvil/badges/workflows/release/badge.svg?label=release)](https://github.com/crookm/anvil/actions/workflows/release.yml)
+[![Latest release version](https://enduringtech.dev/matt/anvil/badges/release.svg)](https://github.com/crookm/anvil/releases/latest)
 
 A custom implementation of a Pages server, which allows Git repositories to be used as the source for a static website.
 
