@@ -13,21 +13,24 @@ jobs:
       DOTNET_INSTALL_DIR: ~/.local/bin/dotnet
 
     steps:
-      - uses: https://data.forgejo.org/actions/checkout@v4
-      - uses: https://github.com/actions/setup-dotnet@v4
+      - name: Checkout
+        uses: https://data.forgejo.org/actions/checkout@v4
+      - name: Setup .NET
+        uses: https://github.com/actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
-      - name: restore
+      - name: Restore
         run: dotnet restore
-      - name: build
+      - name: Build
         run: dotnet build -c Release --no-restore
-      - name: test
+      - name: Test
         run: dotnet test
-      - name: publish
+      - name: Publish
         run: dotnet publish src/Anvil.Server -c Release -o publish /p AssemblyName=anvil-server
 
-      - uses: https://data.forgejo.org/actions/upload-artifact@v4
+      - name: Upload artifacts
+        uses: https://data.forgejo.org/actions/upload-artifact@v4
         with:
           name: application
           path: publish/anvil-server
