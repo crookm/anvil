@@ -33,7 +33,7 @@ jobs:
           dotnet publish src/Anvil.Server -c Release -r ${{ matrix.runtime }} -o publish /p Version=${VERSION#v}
 
       - name: Upload artifacts
-        uses: https://data.forgejo.org/actions/upload-artifact@v4
+        uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4
         with:
           name: ${{ matrix.runtime }}
           path: publish/anvil-server_${{ matrix.runtime }}
@@ -88,7 +88,7 @@ jobs:
       - name: Checkout
         uses: https://data.forgejo.org/actions/checkout@v4
       - name: Download artifacts
-        uses: https://data.forgejo.org/actions/download-artifact@v4
+        uses: https://data.forgejo.org/forgejo/download-artifact@v4
         with:
           path: bin
           merge-multiple: true
