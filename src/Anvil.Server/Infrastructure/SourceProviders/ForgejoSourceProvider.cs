@@ -41,6 +41,10 @@ internal class ForgejoSourceProvider : ISourceProvider
     public async ValueTask<SourceMediaStreamedModel?> GetMediaAsync(RepositoryReferenceModel repo, string path,
         CancellationToken cancellationToken = default)
     {
+        // Remove leading slash
+        // > Forgejo v11+ no longer accepts leading slashes
+        path = path.TrimStart('/');
+
         var uri = $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}/media/{HttpUtility.UrlEncode(path)}";
         if (!string.IsNullOrWhiteSpace(repo.RepoRef)) uri += $"?ref={HttpUtility.UrlEncode(repo.RepoRef)}";
 
