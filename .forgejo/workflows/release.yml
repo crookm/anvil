@@ -17,9 +17,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: https://data.forgejo.org/actions/checkout@v4
+        uses: https://enduringtech.dev/actions/checkout-action@v4
       - name: Setup .NET
-        uses: https://github.com/actions/setup-dotnet@v4
+        uses: https://enduringtech.dev/actions/setup-dotnet-action@v4
         with:
           dotnet-version: 8.0.x
 
@@ -33,7 +33,7 @@ jobs:
           dotnet publish src/Anvil.Server -c Release -r ${{ matrix.runtime }} -o publish /p Version=${VERSION#v}
 
       - name: Upload artifacts
-        uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4
+        uses: https://enduringtech.dev/actions/upload-artifact-action@v4
         with:
           name: ${{ matrix.runtime }}
           path: publish/anvil-server_${{ matrix.runtime }}
@@ -50,9 +50,9 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: https://data.forgejo.org/actions/checkout@v4
+        uses: https://enduringtech.dev/actions/checkout-action@v4
       - name: Login to registry
-        uses: https://data.forgejo.org/docker/login-action@v3.4.0
+        uses: https://enduringtech.dev/actions/docker-login-action@v3.4.0
         with:
           registry: enduringtech.dev
           username: matt
@@ -60,7 +60,7 @@ jobs:
 
       - name: Extract metadata
         id: metadata
-        uses: https://data.forgejo.org/docker/metadata-action@v5.7.0
+        uses: https://enduringtech.dev/actions/docker-metadata-action@v5.7.0
         with:
           images: enduringtech.dev/${{ github.repository }}
           tags: |
@@ -69,7 +69,7 @@ jobs:
 
       - name: Build and push
         id: push
-        uses: https://data.forgejo.org/docker/build-push-action@v6.15.0
+        uses: https://enduringtech.dev/actions/docker-build-push-action@v6.15.0
         with:
           push: true
           file: Dockerfile
@@ -86,9 +86,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: https://data.forgejo.org/actions/checkout@v4
+        uses: https://enduringtech.dev/actions/checkout-action@v4
       - name: Download artifacts
-        uses: https://data.forgejo.org/forgejo/download-artifact@v4
+        uses: https://enduringtech.dev/actions/download-artifact-action@v4
         with:
           path: bin
           merge-multiple: true
@@ -108,7 +108,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changes }}
 
       - name: Commit changelog
-        uses: https://github.com/stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
+        uses: https://enduringtech.dev/actions/commit-action@v5.1.0
         with:
           branch: main
           commit_message: 'docs: update changelog for ${{ github.ref_name }} [skip ci]'
