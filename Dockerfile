@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.13-noble-chiseled@sha256:8d7feba8be6d4532c44fea419bbebaa8db672a177e86d48c1ac793ed7e44da36 AS base
+﻿FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.4-noble-chiseled@sha256:4573c8c35826d126e8301a0683ea38418ccb79d83a9ca341dfd5ad95aee4dc71 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
