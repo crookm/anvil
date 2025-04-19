@@ -100,7 +100,7 @@ jobs:
           tag: ${{ github.ref_name }}
 
       - name: Create release
-        uses: https://enduringtech.dev/actions/release-action@1.3.2
+        uses: https://enduringtech.dev/actions/release-action@v1.3.2
         with:
           draft: true
           files: bin/*
