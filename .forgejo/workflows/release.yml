@@ -17,9 +17,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: https://enduringtech.dev/actions/checkout-action@v4
+        uses: https://enduringtech.dev/actions/checkout-action@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup .NET
-        uses: https://enduringtech.dev/actions/setup-dotnet-action@v4
+        uses: https://enduringtech.dev/actions/setup-dotnet-action@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: 8.0.x
 
@@ -33,7 +33,7 @@ jobs:
           dotnet publish src/Anvil.Server -c Release -r ${{ matrix.runtime }} -o publish /p Version=${VERSION#v}
 
       - name: Upload artifacts
-        uses: https://enduringtech.dev/actions/upload-artifact-action@v4
+        uses: https://enduringtech.dev/actions/upload-artifact-action@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4
         with:
           name: ${{ matrix.runtime }}
           path: publish/anvil-server_${{ matrix.runtime }}
@@ -50,9 +50,9 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: https://enduringtech.dev/actions/checkout-action@v4
+        uses: https://enduringtech.dev/actions/checkout-action@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Login to registry
-        uses: https://enduringtech.dev/actions/docker-login-action@v3.4.0
+        uses: https://enduringtech.dev/actions/docker-login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           registry: enduringtech.dev
           username: matt
@@ -60,7 +60,7 @@ jobs:
 
       - name: Extract metadata
         id: metadata
-        uses: https://enduringtech.dev/actions/docker-metadata-action@v5.7.0
+        uses: https://enduringtech.dev/actions/docker-metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
         with:
           images: enduringtech.dev/${{ github.repository }}
           tags: |
@@ -69,7 +69,7 @@ jobs:
 
       - name: Build and push
         id: push
-        uses: https://enduringtech.dev/actions/docker-build-push-action@v6.15.0
+        uses: https://enduringtech.dev/actions/docker-build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
         with:
           push: true
           file: Dockerfile
@@ -86,21 +86,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: https://enduringtech.dev/actions/checkout-action@v4
+        uses: https://enduringtech.dev/actions/checkout-action@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Download artifacts
-        uses: https://enduringtech.dev/actions/download-artifact-action@v4
+        uses: https://enduringtech.dev/actions/download-artifact-action@d8d0a99033603453ad2255e58720b460a0555e1e # v4
         with:
           path: bin
           merge-multiple: true
 
       - name: Generate changelog
         id: changelog
-        uses: https://enduringtech.dev/actions/changelog-action@v0.1.0
+        uses: https://enduringtech.dev/actions/changelog-action@3a3d44d35ba5e531a65472b3bfd89f998225044a # v0.1.0
         with:
           tag: ${{ github.ref_name }}
 
       - name: Create release
-        uses: https://enduringtech.dev/actions/release-action@v1.3.2
+        uses: https://enduringtech.dev/actions/release-action@f119011bd6c95ab53d2084ace7b539694ce9b252 # v1.3.2
         with:
           draft: true
           files: bin/*
@@ -108,7 +108,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changes }}
 
       - name: Commit changelog
-        uses: https://enduringtech.dev/actions/commit-action@v5.1.0
+        uses: https://enduringtech.dev/actions/commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
         with:
           branch: main
           commit_message: 'docs: update changelog for ${{ github.ref_name }} [skip ci]'
