@@ -1,5 +1,7 @@
 # Anvil Pages Server
 
+<img align="right" src="icon.svg" height="105px" />
+
 [![Status of CI workflow](https://enduringtech.dev/matt/anvil/badges/workflows/ci.yml/badge.svg?label=ci)](https://enduringtech.dev/matt/anvil/actions?workflow=ci.yml)
 [![Status of release workflow](https://enduringtech.dev/matt/anvil/badges/workflows/release.yml/badge.svg?label=release)](https://enduringtech.dev/matt/anvil/actions?workflow=release.yml)
 [![Latest release version](https://enduringtech.dev/matt/anvil/badges/release.svg)](https://enduringtech.dev/matt/anvil/releases/latest)
