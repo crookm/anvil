@@ -92,7 +92,7 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
 
             var linesChecked = 0;
             using var reader = new StreamReader(media.Stream, Encoding.UTF8);
-            while (!reader.EndOfStream || linesChecked < MaxCustomDomainCheckLines)
+            while (!reader.EndOfStream && linesChecked < MaxCustomDomainCheckLines)
             {
                 linesChecked++;
 
