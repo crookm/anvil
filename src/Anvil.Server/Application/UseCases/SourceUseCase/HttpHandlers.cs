@@ -15,6 +15,9 @@ internal static class HttpHandlers
         CancellationToken cancellationToken)
     {
         var domain = context.Request.Host.Value;
+        if (string.IsNullOrWhiteSpace(domain))
+            return Results.StatusCode(StatusCodes.Status400BadRequest);
+
         path ??= "/";
 
         try
