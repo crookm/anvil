@@ -3,6 +3,7 @@ using Anvil.Server.Application.UseCases.DnsUseCase.Queries;
 using Anvil.Server.Domain.Models;
 using DnsClient;
 using Mediator;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text;
 
 namespace Anvil.Server.Application.UseCases.SourceUseCase.Queries;
@@ -24,17 +25,23 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
     private readonly ILogger<GetSourceRepoByDomainQueryHandler> _logger;
     private readonly ISourceProvider _sourceProvider;
     private readonly Mediator.Mediator _mediator;
+    private readonly IMemoryCache _cache;
 
     private const int MaxCustomDomainCheckLines = 128;
 
-    public GetSourceRepoByDomainQueryHandler(ILogger<GetSourceRepoByDomainQueryHandler> logger, ISourceProvider sourceProvider, Mediator.Mediator mediator)
+    private static readonly TimeSpan DomainCacheDuration = TimeSpan.FromHours(1);
+
+    public GetSourceRepoByDomainQueryHandler(ILogger<GetSourceRepoByDomainQueryHandler> logger,
+        ISourceProvider sourceProvider, Mediator.Mediator mediator, IMemoryCache cache)
     {
         _logger = logger;
         _sourceProvider = sourceProvider;
         _mediator = mediator;
+        _cache = cache;
     }
 
-    public async ValueTask<RepositoryReferenceModel?> Handle(GetSourceRepoByDomainQuery query, CancellationToken cancellationToken)
+    public async ValueTask<RepositoryReferenceModel?> Handle(GetSourceRepoByDomainQuery query,
+        CancellationToken cancellationToken)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query.Domain);
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(query.Domain.Length, 3);
@@ -69,12 +76,18 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
         return null;
     }
 
-    private async ValueTask<bool> IsCustomDomainValid(DnsString customDomain, RepositoryReferenceModel repo, CancellationToken cancellationToken)
+    private async ValueTask<bool> IsCustomDomainValid(DnsString customDomain, RepositoryReferenceModel repo,
+        CancellationToken cancellationToken)
     {
+        var cacheKey = $"CustomDomainValidity:{repo.OwnerUserName}:{repo.RepoName}:{customDomain}";
+        if (_cache.TryGetValue(cacheKey, out bool isValid))
+            return isValid;
+
         try
         {
             var domain = customDomain.ToString().TrimEnd('.');
-            var media = await _sourceProvider.GetMediaAsync(repo with { RepoRef = null }, ".domains", cancellationToken);
+            var media = await _sourceProvider.GetMediaAsync(repo with { RepoRef = null }, ".domains",
+                cancellationToken);
             if (media is null) return false;
 
             var linesChecked = 0;
@@ -85,9 +98,13 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
 
                 var line = await reader.ReadLineAsync(cancellationToken);
                 if (!string.IsNullOrWhiteSpace(line) && line.Trim().Equals(domain, StringComparison.OrdinalIgnoreCase))
+                {
+                    _cache.Set(cacheKey, true, DomainCacheDuration);
                     return true;
+                }
             }
 
+            _cache.Set(cacheKey, false, DomainCacheDuration);
             return false;
         }
         catch
