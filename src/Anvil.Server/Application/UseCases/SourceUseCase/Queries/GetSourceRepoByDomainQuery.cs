@@ -99,12 +99,16 @@ internal sealed partial class GetSourceRepoByDomainQueryHandler : IQueryHandler<
                 var line = await reader.ReadLineAsync(cancellationToken);
                 if (!string.IsNullOrWhiteSpace(line) && line.Trim().Equals(domain, StringComparison.OrdinalIgnoreCase))
                 {
-                    _cache.Set(cacheKey, true, DomainCacheDuration);
+                    _cache.Set(cacheKey, true, new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(DomainCacheDuration)
+                        .SetSize(1));
                     return true;
                 }
             }
 
-            _cache.Set(cacheKey, false, DomainCacheDuration);
+            _cache.Set(cacheKey, false, new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(DomainCacheDuration)
+                .SetSize(1));
             return false;
         }
         catch

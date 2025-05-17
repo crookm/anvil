@@ -38,7 +38,9 @@ internal sealed partial class GetSourceRepoValidityQueryHandler : IQueryHandler<
         try
         {
             var result = await _sourceProvider.IsRepoAvailableAsync(query.Repository, cancellationToken);
-            _cache.Set(cacheKey, result, CacheDuration);
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(CacheDuration)
+                .SetSize(1));
 
             return result;
         }
