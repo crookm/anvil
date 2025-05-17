@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.1] - 2025-05-17
+### :sparkles: New features
+- [`fa3d207`](https://enduringtech.dev/matt/anvil/commit/fa3d207903d7f820d9a37679020bbf8532d1b5f9) - caching for repo and custom domain validation *(commit by [@matt](https://enduringtech.dev/matt))*
+
+### :bug: Bug fixes
+- [`19d0c69`](https://enduringtech.dev/matt/anvil/commit/19d0c69f0d31933041f93709d6f5b3bf2b693a15) - limit on custom domain file lines ignored *(commit by [@matt](https://enduringtech.dev/matt))*
+
+### :wrench: Chores
+- [`aa64b21`](https://enduringtech.dev/matt/anvil/commit/aa64b21cba70dbb880a772094c3ff1aa991854cd) - *deps*: update dotnet monorepo *(PR [#18](https://enduringtech.dev/matt/anvil/pull/18) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`f4d9b28`](https://enduringtech.dev/matt/anvil/commit/f4d9b28a93d05df0aa6bd197a3b3b58d4fa49f01) - setup vscode build and debug *(commit by [@matt](https://enduringtech.dev/matt))*
+- [`7777672`](https://enduringtech.dev/matt/anvil/commit/77776722ec659552bc9efcb92b8cbd82a4c29812) - upgrade to .net 9 *(commit by [@matt](https://enduringtech.dev/matt))*
+- [`a71c9c6`](https://enduringtech.dev/matt/anvil/commit/a71c9c660aa7c192357449a0b24e5d5ede1f3633) - *deps*: update mcr.microsoft.com/dotnet/sdk:9.0 docker digest to fe3c1ed *(PR [#15](https://enduringtech.dev/matt/anvil/pull/15) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`6d55103`](https://enduringtech.dev/matt/anvil/commit/6d55103986fefc1e735dfb91dfe9db340b538ed0) - *deps*: update https://enduringtech.dev/actions/docker-build-push-action action to v6.16.0 *(PR [#16](https://enduringtech.dev/matt/anvil/pull/16) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`a0055d7`](https://enduringtech.dev/matt/anvil/commit/a0055d7d190fb58162baa0e394d1fad2d6ace0a0) - *deps*: update https://enduringtech.dev/actions/commit-action action to v5.2.0 *(PR [#14](https://enduringtech.dev/matt/anvil/pull/14) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`1ab09b5`](https://enduringtech.dev/matt/anvil/commit/1ab09b57230525a4870fd5271edca4e4514f0874) - *deps*: update dependency microsoft.extensions.options to 9.0.4 *(PR [#11](https://enduringtech.dev/matt/anvil/pull/11) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`c513b59`](https://enduringtech.dev/matt/anvil/commit/c513b597cb2b91f32a22f6c0edfe312b1a6a462d) - *deps*: update mcr.microsoft.com/dotnet/runtime-deps docker tag to v9 *(PR [#13](https://enduringtech.dev/matt/anvil/pull/13) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`611eab4`](https://enduringtech.dev/matt/anvil/commit/611eab48f4f885dcb794d34aa4ba4c332b4f99cc) - *deps*: pin dependencies *(PR [#10](https://enduringtech.dev/matt/anvil/pull/10) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+- [`e8b9b7b`](https://enduringtech.dev/matt/anvil/commit/e8b9b7b874a1728eebfed9b8580d6d3f6ea9caa4) - configure renovate *(PR [#8](https://enduringtech.dev/matt/anvil/pull/8) by [@renovate.svc](https://enduringtech.dev/renovate.svc))*
+
+
 ## [v0.1.0] - 2025-04-19
 ### :bug: Bug fixes
 - [`b29e4be`](https://enduringtech.dev/matt/anvil/commit/b29e4bec40b79b22f5402bb74eafe3c5ddd30009) - *forgejo*: trim leading slashes from repo file requests *(commit by [@matt](https://enduringtech.dev/matt))*
@@ -72,3 +92,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.4]: https://enduringtech.dev/matt/anvil/compare/v0.0.3...v0.0.4
 [v0.0.5]: https://enduringtech.dev/matt/anvil/compare/v0.0.4...v0.0.5
 [v0.1.0]: https://enduringtech.dev/matt/anvil/compare/v0.0.5...v0.1.0
+[v0.1.1]: https://enduringtech.dev/matt/anvil/compare/v0.1.0...v0.1.1
