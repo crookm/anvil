@@ -31,10 +31,10 @@ internal class ForgejoSourceProvider : ISourceProvider
             ? $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}" // Default branch, check for repo existence
             : $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}/branches/{repo.RepoRef}"; // Specified branch, check for branch existence
 
-        var request = new HttpRequestMessage(HttpMethod.Get, uri);
+        using var request = new HttpRequestMessage(HttpMethod.Get, uri);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        var response = await _httpClient.SendAsync(request, cancellationToken);
+        using var response = await _httpClient.SendAsync(request, cancellationToken);
         return response.IsSuccessStatusCode;
     }
 
@@ -48,7 +48,7 @@ internal class ForgejoSourceProvider : ISourceProvider
         var uri = $"/api/v1/repos/{repo.OwnerUserName}/{repo.RepoName}/media/{HttpUtility.UrlEncode(path)}";
         if (!string.IsNullOrWhiteSpace(repo.RepoRef)) uri += $"?ref={HttpUtility.UrlEncode(repo.RepoRef)}";
 
-        var request = new HttpRequestMessage(HttpMethod.Get, uri);
+        using var request = new HttpRequestMessage(HttpMethod.Get, uri);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
 
         var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
