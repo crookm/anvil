@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.2] - 2025-05-17
+### :bug: Bug fixes
+- [`aa3998e`](https://enduringtech.dev/matt/anvil/commit/aa3998ef621c0fbbea137fcd603418e6bb073eb8) - all requests result in a 404 *(commit by [@matt](https://enduringtech.dev/matt))*
+
+
 ## [v0.1.1] - 2025-05-17
 ### :sparkles: New features
 - [`fa3d207`](https://enduringtech.dev/matt/anvil/commit/fa3d207903d7f820d9a37679020bbf8532d1b5f9) - caching for repo and custom domain validation *(commit by [@matt](https://enduringtech.dev/matt))*
@@ -93,3 +98,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.5]: https://enduringtech.dev/matt/anvil/compare/v0.0.4...v0.0.5
 [v0.1.0]: https://enduringtech.dev/matt/anvil/compare/v0.0.5...v0.1.0
 [v0.1.1]: https://enduringtech.dev/matt/anvil/compare/v0.1.0...v0.1.1
+[v0.1.2]: https://enduringtech.dev/matt/anvil/compare/v0.1.1...v0.1.2
