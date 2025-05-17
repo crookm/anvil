@@ -35,6 +35,17 @@ builder.Services.AddScoped<ISourceProvider, ForgejoSourceProvider>();
 
 
 var app = builder.Build();
+app.Use(async (context, next) =>
+{
+    // Security headers
+    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
+    context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+    context.Response.Headers.Append("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()");
+    
+    await next.Invoke();
+});
+
 app.UseResponseCaching();
 
 app.MapGet("/{**path}", HttpHandlers.GetRoutedSourceMedia);
