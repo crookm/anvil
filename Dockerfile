@@ -1,9 +1,9 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.8-noble-chiseled@sha256:a7242461161c037e1a02397f8374e777000e678d19325046afc0108c58dde882 AS base
+﻿FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.9-noble-chiseled@sha256:ef120bd54269271d0c64101d81df3e754345a17fac1ca3925159e451f7c36036 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:840f3b62b9742dde4461a3c31e38ffd34d41d7d33afd39c378cfcfd5dcb82bd5 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:123b43e4d9775451d8ed63af324a42132707b4edb14770bcdf5c85cf55bc45f1 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /source
 
